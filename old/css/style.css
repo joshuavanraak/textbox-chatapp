@@ -1,4 +1,7 @@
-
+@font-face {
+   font-family: determination;
+   src:url(../fonts/determination1.ttf) format("truetype");
+}
 
  .text span {
    opacity: 0;
@@ -30,28 +33,30 @@
 
 /* Demo styles */
 body {
-   background: #3498db;
+   background: black;
    padding: 3em;
-   font-family: 'Sora', monospace;
+   font-family: determination;
 }
 .text {
    font-size: 6vw;
    word-spacing: 0.2em;
    margin: 0 auto;
-   background: #fff;
+   background: black;
+   color: white;
    padding: 1em;
-   border-bottom: 1vw solid #0e6dad;
+   border: 1vw solid white;
    position:relative;
    line-height: 1.2em;
 }
-.corner {
+
+/* .corner {
    position:absolute;
    width: 10vw;
    right:2vw;
    bottom:0;
    transform: translateY(80%); 
    
-}
+} */
 
 @keyframes dropin {
    0% { transform: translate(0px, 0px); }
