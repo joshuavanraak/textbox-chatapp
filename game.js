@@ -6,8 +6,7 @@ let container = document.querySelector(".text");
 let state = {}
 
 // start the game ;)
-
-function startGame (){
+function startGame() {
     state = {}
     showTextNode(1)
 }
@@ -22,83 +21,69 @@ let speeds = {
     normal: 90,
     fast: 40,
     superFast: 10
- };
+};
 
 let textNodes = [
-    {  
-        // id:1,
+    {
+        id: 1,
+        text: [
+            {speed: speeds.slow, string: "Oh, hello!"},
+            {speed: speeds.pause, string: "", pause: true},
+            {speed: speeds.normal, string: "Have you seen my pet"},
+            {speed: speeds.fast, string: "Cousteau", classes: ["red", "shaking"]},
+            {speed: speeds.normal, string: " around?"}
+        ],
 
-       text:[
-           { speed: speeds.slow, string: "Oh, hello!" },
-           { speed: speeds.pause, string: "", pause: true },
-           { speed: speeds.normal, string: "Have you seen my pet" },
-           { speed: speeds.fast, string: "Cousteau", classes: ["red","shaking"] },
-           { speed: speeds.normal, string: " around?" }
-           ],
+        options: [
+            {
+                text: 'optie 1 doorwerken',
+                setState: {doorWerken: true},
+                nextText: 2
+            },
+            {
+                text: 'optie 2 niksdoen',
+                setState: {niksDoen: true},
+                nextText: 2
+            }
+        ]
+    },
+    {
+        id: 2,
 
-    //    options: [
-    //        {
-    //            text: 'optie 1 doorwerken',
-    //            setState: { doorWerken: true },
-    //            nextText: 2
-    //        },
-    //        {
-    //            text: 'optie 2 niksdoen',
-    //            setState: { niksDoen: true },
-    //            nextText: 2
-    //        }]
-    //    },
+        text: [
+            {speed: speeds.slow, string: "Oh, hello2"},
+            {speed: speeds.pause, string: "", pause: true},
+            {speed: speeds.normal, string: "Have you seen my pet"},
+            {speed: speeds.fast, string: "test2", classes: ["green", "shaking"]},
+            {speed: speeds.normal, string: " around?"}
+        ],
 
-       {  
-        //    id:2,
-
-        //    text:[
-        //        { speed: speeds.slow, string: "Oh, hello2" },
-        //        { speed: speeds.pause, string: "", pause: true },
-        //        { speed: speeds.normal, string: "Have you seen my pet" },
-        //        { speed: speeds.fast, string: "test2", classes: ["green","shaking"] },
-        //        { speed: speeds.normal, string: " around?" }
-        //    ],
-   
-        //    options: [
-        //        {
-        //            text: 'optie 1 doorwerken',
-        //            setState: { cousteau: true },
-        //            nextText: 2
-        //        },
-        //        {
-        //            text: 'optie 2 niksdoen',
-        //            setState: { niksDoen: true },
-        //            nextText: 2
-        //        }]
-        //    },
+        options: [
+            {
+                text: 'optie 1 doorwerken',
+                setState: {cousteau: true},
+                nextText: 2
+            },
+            {
+                text: 'optie 2 niksdoen',
+                setState: {niksDoen: true},
+                nextText: 2
+            }
+        ]
+    }
 ];
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// ANIMATE TEXT SCREEN
 
 let characters = [];
-textNodes.text.forEach((line, index) => {
 
-    if (index < textNodes.length -1){
-        line.string += " ";
-    }
-
-    line.split("").forEach((character) => {
-        let span = document.createElement("span");
-        span.textContent = character;
-        container.appendChild(span);
-        characters.push({
-           span: span,
-           delayAfter: line.speed,
-           classes: line.classes || []
-        });
-     });
-  });
 
 function revealOneCharacter(list) {
     let next = list.splice(0, 1)[0];
+
     next.span.classList.add("revealed");
     next.classes.forEach((c) => {
         next.span.classList.add(c);
@@ -107,33 +92,26 @@ function revealOneCharacter(list) {
     let delay = next.isSpace ? 0 : next.delayAfter;
 
     if (list.length > 0) {
-        setTimeout(function(){
+        setTimeout(function () {
             revealOneCharacter(list);
-        },delay)
+        }, delay)
     }
-
 }
 
-revealOneCharacter(characters);
-
 // show text + show options
+function showTextNode(textNodeIndex) {
 
+    const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
+    container.innerText = '';
 
-function showTextNode(textNodeIndex){
+    // buttons verwijderen.
+    while (optionButtonsElement.firstChild) {
+        optionButtonsElement.removeChild(optionButtonsElement.firstChild)
+    }
 
- const textNode = textNodes.find(textNode => textNode.id === textNodeIndex )
- container.innerText = textNode.text.string
-
-///buttons verwijderen.
-
- while (optionButtonsElement.firstChild){
-     optionButtonsElement.removeChild(optionButtonsElement.firstChild)
- }
-
- /// buttons toevoegen.
-
-    textNode.options.forEach(option =>{
-        if(showOption(option)){
+    /// buttons toevoegen.
+    textNode.options.forEach(option => {
+        if (showOption(option)) {
             let button = document.createElement('button')
             button.innerText = option.text
             button.classList.add('btn')
@@ -141,6 +119,27 @@ function showTextNode(textNodeIndex){
             optionButtonsElement.appendChild(button)
         }
     })
+
+    // split tekst en geef weer
+    textNode.text.forEach((line, index) => {
+
+        if (index < textNodes.length - 1) {
+            line.string += " ";
+        }
+
+        line.string.split('').forEach((character) => {
+            let span = document.createElement("span");
+            span.textContent = character;
+            container.appendChild(span);
+            characters.push({
+                span: span,
+                delayAfter: line.speed,
+                classes: line.classes || []
+            });
+        });
+    });
+
+    revealOneCharacter(characters);
 }
 
 // show the options
@@ -151,9 +150,9 @@ function showOption(option) {
 
 // select options (id's als onder de nul is.. dus -1 start dan opnieuw.)
 
-function selectOption(option){
+function selectOption(option) {
     let nextTextNodeId = option.nextText
-    if (nextTextNodeId <= 0){
+    if (nextTextNodeId <= 0) {
         return startGame()
     }
 

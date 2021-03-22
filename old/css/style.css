@@ -1,52 +1,56 @@
 @font-face {
-   font-family: determination;
-   src:url(../fonts/determination1.ttf) format("truetype");
+    font-family: determination;
+    src: url(../fonts/determination1.ttf) format("truetype");
 }
 
- .text span {
-   opacity: 0;
- }
+.text span {
+    opacity: 0;
+}
+
 .text span.revealed {
-   opacity: 1;
+    opacity: 1;
 }
+
 .text span.green {
-   color: #27ae60;
+    color: #27ae60;
 }
+
 .text span.red {
-   color: #ff0000;  
+    color: #ff0000;
 }
 
 /* Werkt alleen zonder spaties. */
-.text span.shaking{
-   display: inline-block;
-   animation: shake 0.5s;
-   animation-iteration-count: infinite;
-}
-/* Werkt alleen zonder spaties. */
-.text span.wiggling{
-   display: inline-block;
-   animation: wiggle 0.5s;
-   animation-iteration-count: infinite;
+.text span.shaking {
+    display: inline-block;
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
 }
 
+/* Werkt alleen zonder spaties. */
+.text span.wiggling {
+    display: inline-block;
+    animation: wiggle 0.5s;
+    animation-iteration-count: infinite;
+}
 
 
 /* Demo styles */
 body {
-   background: black;
-   padding: 3em;
-   font-family: determination;
+    background: black;
+    padding: 3em;
+    font-family: determination;
 }
-.text {
-   font-size: 6vw;
-   word-spacing: 0.2em;
-   margin: 0 auto;
-   background: black;
-   color: white;
-   padding: 1em;
-   border: 1vw solid white;
-   position:relative;
-   line-height: 1.2em;
+
+.text span {
+    font-size: 6vw;
+    word-spacing: 0.2em;
+    margin: 0 auto;
+    background: black;
+    color: white;
+    padding: 1em;
+    border: 1vw solid white;
+    position: relative;
+    line-height: 1.2em;
 }
 
 /* .corner {
@@ -59,30 +63,68 @@ body {
 } */
 
 @keyframes dropin {
-   0% { transform: translate(0px, 0px); }
-   50% { transform: translate(0px, -5px);}
-   100% {transform: translate(0px, 0px);}
+    0% {
+        transform: translate(0px, 0px);
+    }
+    50% {
+        transform: translate(0px, -5px);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
 }
 
 
-  @keyframes shake {
-   0% { transform: translate(.1rem, .1rem) rotate(0deg); }
-   10% { transform: translate(-.1rem, -.2rem) rotate(-5deg); }
-   20% { transform: translate(-.2rem, 0rem) rotate(5deg); }
-   30% { transform: translate(.2rem, .2rem) rotate(0deg); }
-   40% { transform: translate(.1rem, -.1rem) rotate(5deg); }
-   50% { transform: translate(-.1rem, .2rem) rotate(5deg); }
-   60% { transform: translate(-.2rem, .1rem) rotate(0deg); }
-   70% { transform: translate(.2rem, .1rem) rotate(-5deg); }
-   80% { transform: translate(-.1rem, -.1rem) rotate(5deg); }
-   90% { transform: translate(.1rem, .2rem) rotate(0deg); }
-   100% { transform: translate(.1rem, -.2rem) rotate(-5deg); }
- } 
+@keyframes shake {
+    0% {
+        transform: translate(.1rem, .1rem) rotate(0deg);
+    }
+    10% {
+        transform: translate(-.1rem, -.2rem) rotate(-5deg);
+    }
+    20% {
+        transform: translate(-.2rem, 0rem) rotate(5deg);
+    }
+    30% {
+        transform: translate(.2rem, .2rem) rotate(0deg);
+    }
+    40% {
+        transform: translate(.1rem, -.1rem) rotate(5deg);
+    }
+    50% {
+        transform: translate(-.1rem, .2rem) rotate(5deg);
+    }
+    60% {
+        transform: translate(-.2rem, .1rem) rotate(0deg);
+    }
+    70% {
+        transform: translate(.2rem, .1rem) rotate(-5deg);
+    }
+    80% {
+        transform: translate(-.1rem, -.1rem) rotate(5deg);
+    }
+    90% {
+        transform: translate(.1rem, .2rem) rotate(0deg);
+    }
+    100% {
+        transform: translate(.1rem, -.2rem) rotate(-5deg);
+    }
+}
 
- @keyframes wiggle {
-    0% { transform: rotate(0deg); }
-   80% { transform: rotate(0deg); }
-   85% { transform: rotate(5deg); }
-   95% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg); }
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg);
+    }
+    80% {
+        transform: rotate(0deg);
+    }
+    85% {
+        transform: rotate(5deg);
+    }
+    95% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
